@@ -8,7 +8,6 @@ const { Contract } = require('fabric-contract-api');
 
 class MyAssetContract extends Contract {
 
-
     async empValidExists(ctx, empValidId) {
         const buffer = await ctx.stub.getState(empValidId);
         return (!!buffer && buffer.length > 0);
@@ -26,6 +25,7 @@ class MyAssetContract extends Contract {
                 usn: '1RV16EC001',
                 company: 'wdc',
                 schoolValidate: "0",
+                usnValidate:"0",
                 collegeValidate: "0",
                 companyValidate: "0",
             },
@@ -36,6 +36,7 @@ class MyAssetContract extends Contract {
                 usn: '1RV16EC002',
                 company: 'cisco',
                 schoolValidate: "0",
+                usnValidate:"0",
                 collegeValidate: "0",
                 companyValidate: "0",
             },
@@ -46,6 +47,7 @@ class MyAssetContract extends Contract {
                 usn: '1RV16EC003',
                 company: 'cisco',
                 schoolValidate: "0",
+                usnValidate:"0",
                 collegeValidate: "0",
                 companyValidate: "0",
             },
@@ -56,6 +58,7 @@ class MyAssetContract extends Contract {
                 usn: '1RV16EC004',
                 company: 'UHG',
                 schoolValidate: "0",
+                usnValidate:"0",
                 collegeValidate: "0",
                 companyValidate: "0",
             }
@@ -78,7 +81,7 @@ class MyAssetContract extends Contract {
         return empAsBytes.toString();
     }
 
-    async createEmp(ctx, empId, name, school, college, usn, company, validate="000") {
+    async createEmp(ctx, empId, name, school, college, usn, company, schoolValidate, usnValidate, collegeValidate, companyValidate) {
         console.info('============= START : Create emp ===========');
 
         const emp = {
@@ -89,6 +92,7 @@ class MyAssetContract extends Contract {
             usn,
             company,
             schoolValidate,
+            usnValidate,
             collegeValidate,
             companyValidate,
         };
@@ -112,6 +116,7 @@ class MyAssetContract extends Contract {
             emp.schoolValidate = "1";
         } else if (index == "2") {
             emp.collegeValidate = "1";
+            emp.usnValidate="1";
         } else if (index == "3") {
             emp.companyValidate = "1";
         }
